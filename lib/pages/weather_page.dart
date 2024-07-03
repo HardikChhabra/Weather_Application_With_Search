@@ -5,25 +5,37 @@ import 'package:weather_application_advanced/entities/weather/weather.dart';
 import 'package:weather_application_advanced/pages/search_page.dart';
 import 'package:weather_application_advanced/services/weather.dart';
 
+/// A widget that displays the weather information for a given city.
+///
+/// Example:
+/// ```dart
+/// WeatherPage(city: 'New York')
+/// ```
 class WeatherPage extends StatefulWidget {
-  //city to show weather of
+  /// The city to show weather of.
   final String city;
+
   const WeatherPage({super.key, required this.city});
 
   @override
   State<WeatherPage> createState() => _WeatherPageState();
 }
 
+/// The state of the [WeatherPage] widget.
 class _WeatherPageState extends State<WeatherPage> {
-  //instance of weather service to fetch weather
+  /// An instance of the weather service to fetch weather.
   final _weatherService = WeatherService();
 
-  //instance of weather to show weather
+  /// An instance of the weather to show weather.
   Weather? _weather;
 
-  //fetch weather
+  /// Fetches the weather for a given city.
+  ///
+  /// Example:
+  /// ```dart
+  /// fetchWeather('London');
+  /// ```
   Future<void> fetchWeather(String cityName) async {
-    //get weather for city
     try {
       final weather = await _weatherService.getWeather(cityName);
       setState(() {
@@ -38,21 +50,21 @@ class _WeatherPageState extends State<WeatherPage> {
   void initState() {
     super.initState();
 
-    //fetching the weather
+    // Fetching the weather
     fetchWeather(widget.city);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //background color from themes
+      // Background color from themes
       backgroundColor: Theme.of(context).colorScheme.background,
 
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            //Route to search page
+            // Route to search page
             IconButton(
               onPressed: () {
                 Navigator.push(
@@ -63,27 +75,27 @@ class _WeatherPageState extends State<WeatherPage> {
               icon: const Icon(Icons.search),
             ),
 
-            //city name
+            // City name
             GoogleTextStyle(
                 text: _weather?.cityName ?? "Loading city...", size: 40),
 
-            //weather animation
+            // Weather animation
             WeatherAnimation(mainCondition: _weather?.mainCondition),
 
-            //weather information
+            // Weather information
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                //weather condition
+                // Weather condition
                 GoogleTextStyle(
                     text: _weather?.mainCondition ?? "Loading Condition...",
                     size: 20),
 
-                //weather temperature
+                // Weather temperature
                 GoogleTextStyle(text: "${_weather?.temperature}°", size: 50),
 
-                //wind speed and humidity
+                // Wind speed and humidity
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

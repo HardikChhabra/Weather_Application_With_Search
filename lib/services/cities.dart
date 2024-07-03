@@ -2,8 +2,22 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather_application_advanced/constants/env_constants/constant.dart';
 
+/// A service class that provides functionality to fetch cities resembling a given query.
 class CitiesService {
-  //function to fetch cities resembling query
+  /// Fetches a list of cities that match the given query.
+  ///
+  /// This function makes an HTTP GET request to the OpenWeatherAPI to fetch a list of cities
+  /// that resemble the given query. The response is then parsed and a list of city names is returned.
+  ///
+  /// Example:
+  /// ```dart
+  /// final citiesService = CitiesService();
+  /// final cities = await citiesService.fetchCities('New York');
+  /// print(cities); // Output: ['New York', 'New York City', ...]
+  /// ```
+  ///
+  /// @param query The search query to fetch cities for.
+  /// @return A list of city names that match the query.
   Future<List<String>> fetchCities(String query) async {
     if (query.isEmpty) {
       return [];

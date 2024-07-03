@@ -5,6 +5,7 @@ import 'package:weather_application_advanced/pages/weather_page.dart';
 import 'package:weather_application_advanced/services/cities.dart';
 import 'package:weather_application_advanced/settings/preferences.dart';
 
+/// A search page that allows users to search for cities and view their weather information.
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
@@ -12,12 +13,24 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
+/// The state of the SearchPage widget.
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController queryController = TextEditingController();
-  CitiesService citiesService = CitiesService();
+  /// A text controller for the search query.
+  final TextEditingController queryController = TextEditingController();
+
+  /// An instance of the CitiesService class, used to fetch cities from the API.
+  final CitiesService citiesService = CitiesService();
+
+  /// A list of cities that match the search query.
   List<String> resultCities = [];
+
+  /// A boolean indicating whether the search is in progress.
   bool isLoading = false;
 
+  /// Fetches cities from the API based on the search query.
+  ///
+  ///
+  /// return A Future that completes when the cities are fetched.
   Future<void> _fetchCities(String query) async {
     setState(() {
       isLoading = true;
@@ -45,23 +58,36 @@ class _SearchPageState extends State<SearchPage> {
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Column(
           children: [
-            //search bar
+            // Search bar
             const SizedBox(
               height: 24,
             ),
+
+            ///
+            ///A custom search bar that allows users to input their search query.
+            ///
+            /// Example:
+            /// ```
+            /// CustomSearchBar(
+            ///   hint: 'Search',
+            ///   onChanged: _fetchCities,
+            ///   controller: queryController,
+            /// )
+            /// ```
+            ///
             CustomSearchBar(
               hint: 'Search',
               onChanged: _fetchCities,
               controller: queryController,
             ),
 
-            //show list of cities or a loaging page
+            // Show list of cities or a loading page
             isLoading
                 ?
-                //loading page
+                // Loading page
                 const LoadingScreenWidget()
                 :
-                //list of cities
+                // List of cities
                 Expanded(
                     child: ListView.builder(
                       itemCount: resultCities.length,

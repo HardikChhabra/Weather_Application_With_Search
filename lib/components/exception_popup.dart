@@ -2,11 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_application_advanced/components/text_style.dart';
 
+/// A dialog box that displays an error message and a refresh button.
+///
+/// This dialog box is used to display an error message to the user and provide
+/// a way to refresh the page.
+///
+/// Example:
+/// ```dart
+/// ErrorDialogBox(
+///   errorMessage: 'Failed to load data',
+///   refreshPage: () {
+///     // Refresh page logic here
+///   },
+/// );
+/// ```
 class ErrorDialogBox extends StatelessWidget {
+  /// The error message to be displayed.
   final String errorMessage;
+
+  /// A function to be called when the refresh button is pressed.
   final Function refreshPage;
-  const ErrorDialogBox(
-      {super.key, required this.errorMessage, required this.refreshPage});
+
+  const ErrorDialogBox({
+    super.key,
+    required this.errorMessage,
+    required this.refreshPage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +60,7 @@ class ErrorDialogBox extends StatelessWidget {
 
             //refresh button
             TextButton(
-                onPressed: () => refreshPage,
+                onPressed: () => refreshPage(),
                 child: const GoogleTextStyle(
                   text: "Refresh Page",
                   size: 20,
