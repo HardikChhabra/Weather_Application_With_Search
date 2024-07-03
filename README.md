@@ -4,7 +4,11 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this application on your system:
+- download and extract the zip file for the repository
+- in cmd, navigate to the extracted folder
+- run command "flutter run"
+- if flutter is installed on your system and an emulator is setup, the application would run
 
 A few resources to get you started if this is your first Flutter project:
 
