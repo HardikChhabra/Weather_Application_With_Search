@@ -30,8 +30,8 @@ class WeatherAnimation extends StatelessWidget {
     }
     switch (mainCondition.toLowerCase()) {
       case 'clouds':
-      case 'ist':
-      case 'moke':
+      case 'mist':
+      case 'smoke':
       case 'haze':
       case 'dust':
       case 'fog':
